@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    *{
+        box-sizing: border-box;
+    }
+    #container{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        height:autos;
+        width:100%; 
+        position: relative;
+    }
+    .getcharacter{
+        margin-top:10px;
+        margin-left:10px;
+        margin-bottom: 10px;
+        padding:5px;
+        background-color:white;
+        border-radius:5px;
+        max-width:450px;
+        height:auto;
+    }
+    table{
+        width:50%;
+        margin:4px;
+        padding:2px;
+        background-color:#ccc; 
+    }
+    img{
+        margin:10px;
+        width: 200px;
+        height: auto;
+        box-shadow:10px 10px 5px #000;
+    }
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #04AA6D;
+  color: black;
+}
+
+.next {
+  background-color: #04AA6D;
+  color: white;
+}
+header{
+    margin-left:47%;
+    width:50%;
+}
+.round {
+  border-radius: 50%;
+}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="" alt="Picture" class="charimg">
+        <table border="1">
+            <tr>
+                <th colspan="3" width="60%">Information about Characters</th>
+            </tr>
+            <tr>
+                <td width="40%">Name</td>
+                <td width="40%">Eye Color</td>
+                <td width="40%">Skin Color</td>
+            </tr>
+            <tr>
+                <td><div id="name">...</div></td>
+                <td><div id="eye_color">...</div></td>
+                <td><div id="skin_color">...</div></td>
+            </tr>
+        </table>
+    </div>
+    <header>
+    <a href="#" id="pre" class="previous round">&#8249;</a>
+<a href="#" id="next" class="next round">&#8250;</a>
+</header>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script>
+        const name=document.getElementById("name")
+        const eye_color=document.getElementById("eye_color")
+        const skin_color=document.getElementById("skin_color")
+        var c=0;
+        $(document).ready(function(){
+            // $("button").on("click",function(e){
+            //     e.preventDefault()
+            //     name.innerHTML='<em>Loading...</em>';
+            //     eye_color.innerHTML='<em>Loading...</em>';
+            //     skin_color.innerHTML='<em>Loading...</em>';
+            //     const randNumber=Math.ceil(Math.random()*88)
+            //     $.get(`https://akabab.github.io/starwars-api/api/id/${randNumber}.json`,function(data){
+            //         name.innerHTML=data['name']
+            //         eye_color.innerHTML=data['eyeColor']
+            //         skin_color.innerHTML=data['skinColor']
+            //         $(".charimg").attr("src",data['image'])  
+            //     })
+            // })
+            $("#next").on("click",function(){
+                name.innerHTML='<em>Loading...</em>';
+                 eye_color.innerHTML='<em>Loading...</em>';
+                skin_color.innerHTML='<em>Loading...</em>';
+                c++;
+                $.get(`https://akabab.github.io/starwars-api/api/id/${c}.json`,function(data){
+                    name.innerHTML=data['name']
+                     eye_color.innerHTML=data['eyeColor']
+                     skin_color.innerHTML=data['skinColor']
+                   $(".charimg").attr("src",data['image'])
+                })
+            })
+            $("#pre").on("click",function(){
+                name.innerHTML='<em>Loading...</em>';
+                eye_color.innerHTML='<em>Loading...</em>';
+                skin_color.innerHTML='<em>Loading...</em>';
+                c--;
+                if(c<=0){
+                c=1;
+                }
+                $.get(`https://akabab.github.io/starwars-api/api/id/${c}.json`,function(data){
+                    name.innerHTML=data['name']
+                    eye_color.innerHTML=data['eyeColor']
+                    skin_color.innerHTML=data['skinColor']
+                   $(".charimg").attr("src",data['image'])
+                })
+            })
+
+        })
+    </script>
+</body>
+</html>
